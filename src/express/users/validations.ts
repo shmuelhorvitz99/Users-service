@@ -4,32 +4,19 @@ import { zodMongoObjectId } from '../../utils/zod.js';
 const requiredFields = z
     .object({
         name: z.string(),
+        IDFid: z.number()
     })
     .required();
 
 const optionalFields = z
     .object({
-        age: z.number(),
-    })
-    .partial();
+        isAdmin: z.boolean(),
+    });
 
-// GET /api/features
-export const getByQueryRequestSchema = z.object({
+// GET /api/features/
+export const getAllRequestSchema = z.object({
     body: z.object({}),
-    query: z
-        .object({
-            step: z.coerce.number().min(0).default(0),
-            limit: z.coerce.number().optional(),
-        })
-        .merge(requiredFields.partial())
-        .merge(optionalFields),
-    params: z.object({}),
-});
-
-// GET /api/features/count
-export const getCountRequestSchema = z.object({
-    body: z.object({}),
-    query: requiredFields.partial().merge(optionalFields),
+    query: z.object({}),
     params: z.object({}),
 });
 
