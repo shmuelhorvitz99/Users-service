@@ -26,8 +26,7 @@ const removeAllCollections = async () => {
 };
 
 const exampleUser: User = {
-    name: 'test',
-    IDFid: 123,
+    genesisId: 123,
     isAdmin: false,
 };
 

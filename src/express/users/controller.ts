@@ -15,7 +15,6 @@ export class UsersController {
     static getAll = async (_req: TypedRequest<typeof getAllRequestSchema>, res: Response) => {
         res.json(await UsersManager.getAll());
     };
-
     static getById = async (req: TypedRequest<typeof getByIdRequestSchema>, res: Response) => {
         res.json(await UsersManager.getById(req.params.id));
     };

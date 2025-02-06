@@ -3,8 +3,7 @@ import { zodMongoObjectId } from '../../utils/zod.js';
 
 const requiredFields = z
     .object({
-        name: z.string(),
-        IDFid: z.number()
+        genesisId: z.number()
     })
     .required();
 
