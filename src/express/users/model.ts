@@ -5,7 +5,7 @@ import { UserDocument } from './interface.js';
 const UsersSchema = new mongoose.Schema<UserDocument>(
     {
         genesisId: {
-            type: Number,
+            type: String,
             required: true,
         },
         isAdmin: {

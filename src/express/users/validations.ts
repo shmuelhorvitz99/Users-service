@@ -1,25 +1,20 @@
 import { z } from 'zod';
-import { zodMongoObjectId } from '../../utils/zod.js';
+
+export const zodMongoObjectId = z.string().regex(/^[0-9a-fA-F]{24}$/, { message: 'Invalid ObjectId' });
 
 const requiredFields = z
     .object({
-        genesisId: z.number()
+        isAdmin: z.boolean(),
     })
     .required();
 
-const optionalFields = z
-    .object({
-        isAdmin: z.boolean(),
-    });
+// const optionalFields = z
+//     .object({
+//         genesisId: zodMongoObjectId,
+//     })
+//     .required();
 
-// GET /api/features/
-export const getAllRequestSchema = z.object({
-    body: z.object({}),
-    query: z.object({}),
-    params: z.object({}),
-});
-
-// GET /api/features/:id
+// GET /api/users/:id
 export const getByIdRequestSchema = z.object({
     body: z.object({}),
     query: z.object({}),
@@ -28,23 +23,23 @@ export const getByIdRequestSchema = z.object({
     }),
 });
 
-// POST /api/features
+// POST /api/users
 export const createOneRequestSchema = z.object({
-    body: requiredFields.merge(optionalFields),
+    body: requiredFields,
     query: z.object({}),
     params: z.object({}),
 });
 
-// PUT /api/features/:id
+// PUT /api/users/:id
 export const updateOneRequestSchema = z.object({
-    body: requiredFields.partial().merge(optionalFields),
+    body: requiredFields,
     query: z.object({}),
     params: z.object({
         id: zodMongoObjectId,
     }),
 });
 
-// DELETE /api/features/:id
+// DELETE /api/users/:id
 export const deleteOneRequestSchema = z.object({
     body: z.object({}),
     query: z.object({}),

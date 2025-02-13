@@ -1,6 +1,6 @@
 /* v8 ignore start */
 export interface User {
-    genesisId: number;
+    genesisId: string;
     isAdmin: boolean;
 }
 
