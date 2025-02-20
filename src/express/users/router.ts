@@ -5,8 +5,6 @@ import { createOneRequestSchema, deleteOneRequestSchema, getByIdRequestSchema, u
 
 export const usersRouter = Router();
 
-// usersRouter.get('/', validateRequest(getAllRequestSchema), wrapController(UsersController.getAll));
-
 usersRouter.get('/:id', validateRequest(getByIdRequestSchema), wrapController(UsersController.getById));
 
 usersRouter.post('/', validateRequest(createOneRequestSchema), wrapController(UsersController.createOne));
