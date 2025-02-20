@@ -8,11 +8,11 @@ const requiredFields = z
     })
     .required();
 
-// const optionalFields = z
-//     .object({
-//         genesisId: zodMongoObjectId,
-//     })
-//     .required();
+const optionalFields = z
+    .object({
+        genesisId: z.string(),
+    })
+    .required();
 
 // GET /api/users/:id
 export const getByIdRequestSchema = z.object({
@@ -25,7 +25,7 @@ export const getByIdRequestSchema = z.object({
 
 // POST /api/users
 export const createOneRequestSchema = z.object({
-    body: requiredFields,
+    body: requiredFields.merge(optionalFields),
     query: z.object({}),
     params: z.object({}),
 });

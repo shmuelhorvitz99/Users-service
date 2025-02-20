@@ -3,12 +3,12 @@ import { User, UserDocument } from './interface.js';
 import { UsersModel } from './model.js';
 
 export class UsersManager {
-    static getById = async (genesisId: string): Promise<UserDocument> => {
-        return await UsersModel.findOne({ genesisId: genesisId }).orFail(new DocumentNotFoundError(genesisId)).lean().exec();
+    static getById = async (genesisId: string): Promise<UserDocument | null> => {
+        return await UsersModel.findOne({ genesisId: genesisId }).lean().exec() || null;
     };
 
     static createOne = async (user: User): Promise<UserDocument> => {
-        return UsersModel.create({ user });
+        return UsersModel.create( user );
     };
 
     static updateOne = async (userId: string, update: Partial<User>): Promise<UserDocument> => {

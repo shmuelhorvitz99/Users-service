@@ -9,7 +9,8 @@ export class UsersController {
     };
 
     static createOne = async (req: TypedRequest<typeof createOneRequestSchema>, res: Response) => {
-        res.json(await UsersManager.createOne({ isAdmin: req.body.isAdmin, genesisId: req.user?.genesisId ?? 'req.params.id' }));
+        console.log(req.body);
+        res.json(await UsersManager.createOne(req.body));
     };
 
     static updateOne = async (req: TypedRequest<typeof updateOneRequestSchema>, res: Response) => {
