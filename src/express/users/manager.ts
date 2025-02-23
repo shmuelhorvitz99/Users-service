@@ -11,11 +11,12 @@ export class UsersManager {
         return UsersModel.create( user );
     };
 
-    static updateOne = async (userId: string, update: Partial<User>): Promise<UserDocument> => {
-        return UsersModel.findByIdAndUpdate(userId, update, { new: true }).orFail(new DocumentNotFoundError(userId)).lean().exec();
+    static updateOne = async (genesisId: string, update: Partial<User>): Promise<UserDocument> => {
+        
+        return UsersModel.findOneAndUpdate({ genesisId: genesisId }, update, { new: true }).orFail(new DocumentNotFoundError(genesisId)).lean().exec();
     };
 
-    static deleteOne = async (userId: string): Promise<UserDocument> => {
-        return UsersModel.findByIdAndDelete(userId).orFail(new DocumentNotFoundError(userId)).lean().exec();
+    static deleteOne = async (genesisId: string): Promise<UserDocument> => {
+        return UsersModel.findOneAndDelete({genesisId:genesisId}).orFail(new DocumentNotFoundError(genesisId)).lean().exec();
     };
 }

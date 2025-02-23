@@ -19,7 +19,7 @@ export const getByIdRequestSchema = z.object({
     body: z.object({}),
     query: z.object({}),
     params: z.object({
-        id: zodMongoObjectId,
+        id: z.string(),
     }),
 });
 
@@ -35,7 +35,7 @@ export const updateOneRequestSchema = z.object({
     body: requiredFields,
     query: z.object({}),
     params: z.object({
-        id: zodMongoObjectId,
+        id: z.string(),
     }),
 });
 
@@ -44,6 +44,6 @@ export const deleteOneRequestSchema = z.object({
     body: z.object({}),
     query: z.object({}),
     params: z.object({
-        id: zodMongoObjectId,
+        id: z.string(),
     }),
 });
