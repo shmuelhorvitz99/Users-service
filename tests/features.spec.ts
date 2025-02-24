@@ -5,7 +5,6 @@ import { afterAll, beforeAll, beforeEach, describe, expect, it } from 'vitest';
 import { config } from '../src/config.js';
 import { User } from '../src/express/users/interface.js';
 import { Server } from '../src/express/server.js';
-import { g } from 'vitest/dist/suite-dWqIFb_-.js';
 
 const { mongo } = config;
 const fakeObjectId = '111111111111111111111111';
@@ -54,7 +53,7 @@ describe('e2e users API testing', () => {
     });
 
     describe('/unknownRoute', () => {
-        it('should return status code 404', async () => {
+        it('should return status code 404 for unknown route', async () => {
             await request(app).get('/unknownRoute').expect(404);
         });
     });
@@ -72,7 +71,7 @@ describe('e2e users API testing', () => {
 
     describe('GET /api/users/:id', () => {
         it('should return 200 with null for a non-existing user', async () => {
-            const response = await request(app).get(`/api/users/111`).expect(200);
+            const response = await request(app).get(`/api/users/${fakeObjectId}`).expect(200);
             expect(response.body).toBeNull();
         });
 
@@ -95,7 +94,19 @@ describe('e2e users API testing', () => {
 
         it('should return 404 for a non-existing user', async () => {
             const updatedUser = { genesisId: exampleUser.genesisId, isAdmin: true };
-            await request(app).put(`/api/users/${fakeObjectId}1`).send(updatedUser).expect(404);
+            await request(app).put(`/api/users/${fakeObjectId}`).send(updatedUser).expect(404);
+        });
+    });
+
+    describe('DELETE /api/users/:id', () => {
+        it('should return 200 with the deleted user', async () => {
+            await request(app).put(`/api/users/${exampleUser.genesisId}`).send(exampleUser).expect(200);
+            const response = await request(app).delete(`/api/users/${exampleUser.genesisId}`).expect(200);
+            expect(response.body).toEqual(expect.objectContaining(exampleUser));
+        });
+
+        it('should return 404 for a non-existing user', async () => {
+            await request(app).delete(`/api/users/${fakeObjectId}`).expect(404);
         });
     });
 });
