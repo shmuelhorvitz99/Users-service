@@ -1,15 +1,20 @@
-#build stage
-FROM node:20.10.0-alpine AS build
-WORKDIR /app
-COPY ./package*.json ./
-RUN npm install --silent --production=false
-COPY . .
-RUN npm run build
+# בחר את בסיס התמונה
+FROM node:18
 
-#production stage
-FROM node:20.10.0-alpine
-COPY --from=build /app/package*.json ./
-RUN npm install --silent --production
-COPY --from=build /app/dist /dist
+# הגדרת תיקיית העבודה
+WORKDIR /app
+
+# העתקת קבצי package.json ו-package-lock.json
+COPY package*.json ./
+
+# התקנת התלויות
+RUN npm install
+
+# העתקת שאר הקבצים
+COPY . .
+
+# חשיפת הפורט שבו השירות רץ
 EXPOSE 8000
+
+# הפעלת השרת
 CMD ["npm", "start"]
