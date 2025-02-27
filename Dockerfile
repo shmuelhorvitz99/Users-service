@@ -14,7 +14,7 @@ RUN npm install
 COPY . .
 
 # חשיפת הפורט שבו השירות רץ
-EXPOSE 8000
+EXPOSE 4000
 
 # הפעלת השרת
 CMD ["npm", "start"]
