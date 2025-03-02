@@ -9,7 +9,6 @@ export class UsersController {
     };
 
     static createOne = async (req: TypedRequest<typeof createOneRequestSchema>, res: Response) => {
-        console.log(req.body);
         res.json(await UsersManager.createOne(req.body));
     };
 
