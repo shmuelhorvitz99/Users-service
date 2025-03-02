@@ -3,7 +3,7 @@ import env from 'env-var';
 
 export const config = {
     service: {
-        port: env.get('PORT').default(4000).required().asPortNumber(),
+        port: env.get('PORT').default(3002).required().asPortNumber(),
     },
     mongo: {
         uri: env.get('MONGO_URI').default('mongodb://localhost/WhatsDown').required().asString(),
